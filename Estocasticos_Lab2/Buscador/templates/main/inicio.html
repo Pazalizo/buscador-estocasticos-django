@@ -1,0 +1,94 @@
+{% extends 'layouts/header.html' %}
+{%load static%}
+{%block content%} 
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" href="{% static 'styles/index.css'%}">
+        <title>Filtro de elementos</title>
+    </head>
+    <body style="background: black;">
+    <section id="contenedor-main">
+        <center>
+            <div style="margin-top: 500px;">
+                {%if banner1 == "GUCCI" %}
+                    <img class="banner" src="{% static 'images/GUCCI.jpg'%}">
+                {%elif banner1 == "DIOR" %}
+                    <img class="banner" src="{% static 'images/DIOR.jpg'%}">
+                {%elif banner1 == "VERSACE" %}
+                    <img class="banner" src="{% static 'images/VERSACE.jpg'%}">
+                {%elif banner1 == "BALENCIAGA" %}
+                    <img class="banner" src="{% static 'images/BALENCIAGA.png'%}">
+                {%elif banner1 == "PRADA" %}
+                    <img class="banner" src="{% static 'images/PRADA.jpg'%}">
+                {%endif%}
+            </div>
+        </center>
+        <div style="margin-top: 30px;">
+            <form method="POST" action="{% url 'inicio' %}">
+                {% csrf_token %}
+                <input type="text" name="buscador" id="buscador" placeholder="Buscar...">
+                <button>
+                    Buscar
+                </button>  
+                <ul id="listaArticulos">
+                    {% for articulo in pg %}
+                    <li class="articulo" style="border: 1px solid orange;">
+                        Zapatos {{ articulo }}
+                        <img style="height: 100px;" src="{% static 'images/Zapatos/'|add:articulo|add:'.jpg' %}">
+                    </li>
+                    <li class="articulo" style="border: 1px solid orange;">
+                        Camiseta {{ articulo }}
+                        <img style="height: 100px;" src="{% static 'images/Camiseta/'|add:articulo|add:'.jpg' %}">
+                    </li>
+                    <li class="articulo" style="border: 1px solid orange;">
+                        Saco {{ articulo }}
+                        <img style="height: 100px;" src="{% static 'images/Saco/'|add:articulo|add:'.jpg' %}">
+                    </li>
+                    <li class="articulo" style="border: 1px solid orange;">
+                        Pantalon {{ articulo }}
+                        <img style="height: 100px;" src="{% static 'images/Pantalon/'|add:articulo|add:'.jpg' %}">
+                    </li>
+                    <li class="articulo" style="border: 1px solid orange;">
+                        Chaqueta {{ articulo }}
+                        <img style="height: 100px;" src="{% static 'images/Chaqueta/'|add:articulo|add:'.jpg' %}">
+                    </li>
+                    {% endfor %}
+                    {% for i in mayor %}
+                    <li class="articulo_mayor" style="border: 1px solid orange;">
+                        Zapatos {{ i }}
+                        <img style="height: 100px;" style="height: 100px;" src="{% static 'images/Zapatos/'|add:i|add:'.jpg' %}">
+                    </li>
+                    <li class="articulo_mayor" style="border: 1px solid orange;">
+                        Camiseta {{ i }}
+                        <img style="height: 100px;" style="height: 100px;" src="{% static 'images/Camiseta/'|add:i|add:'.jpg' %}">
+                    </li>
+                    {% endfor %}
+                </ul>
+            </form>
+            <center>
+                <div style="margin-bottom: 40px;">
+                    {%if banner2 == "GUCCI" %}
+                        <img class="banner" src="{% static 'images/GUCCI.jpg'%}">
+                    {%elif banner2 == "DIOR" %}
+                        <img class="banner" src="{% static 'images/DIOR.jpg'%}">
+                    {%elif banner2 == "VERSACE" %}
+                        <img class="banner" src="{% static 'images/VERSACE.jpg'%}">
+                    {%elif banner2 == "BALENCIAGA" %}
+                        <img class="banner" src="{% static 'images/BALENCIAGA.png'%}">
+                    {%elif banner2 == "PRADA" %}
+                        <img class="banner" src="{% static 'images/PRADA.jpg'%}">
+                    {%endif%}
+                </div>
+            </center>
+        </div>
+    
+    </section>
+    <script src="{% static 'scripts/script.js'%}"></script>
+    </body>
+</html>
+{%endblock%}
